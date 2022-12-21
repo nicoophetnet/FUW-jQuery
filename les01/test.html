@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rock {
+            background-color: #7e7e7e;
+            /* gray color for the rock */
+            border-radius: 50%;
+            /* round edges */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            /* give the rock a shadow */
+        }
+
+        .rock {
+            /* other styles */
+            width: 100px;
+            /* set the width to 100 pixels */
+            height: 100px;
+            /* set the height to 100 pixels */
+        }
+
+        .rock {
+            /* other styles */
+            background-image: url('rock-texture.jpg');
+            background-size: cover;
+            /* stretch the image to fit the div */
+        }
+
+        .drop-area {
+            background-color: purple;
+            width: 100px;
+            height: 100px;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="flex">
+        <div class="drop-area"></div>
+        <div class="drop-area"></div>
+        <div class="drop-area"></div>
+        <div class="drop-area"></div>
+    </div>
+    <div class="rock" draggable="true"></div>
+
+    <script>
+        const rock = document.querySelector('.rock');
+
+        rock.addEventListener('dragstart', function (event) {
+            event.dataTransfer.setData('text/plain', 'rock');
+        });
+
+        const dropArea = document.querySelector('.drop-area');
+
+        dropArea.addEventListener('dragover', function (event) {
+            event.preventDefault();
+        });
+
+        dropArea.addEventListener('drop', function (event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData('text/plain');
+            if (data === 'rock') {
+                dropArea.appendChild(rock);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
